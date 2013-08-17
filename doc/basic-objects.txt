@@ -1,0 +1,221 @@
+Version
+--------
+
+-> tools/vcompat
+
+uint16  version
+uint32  size
+
+
+Point, Size, Fraction
+----------------------
+
+-> tools/gen
+
+int32  a
+int32  b
+
+
+# Just empty super class
+# 
+# Polygon
+# --------
+# 
+# -> tools/poly.h
+# -> tools/poly.cxx
+# 
+# uint16   size
+# Point[]  points
+
+
+SimplePolygon
+--------------
+
+-> tools/poly.h
+-> tools/poly.cxx
+
+uint16   size
+Point[]  points
+
+
+ComplexPolygon
+---------------
+
+-> tools/poly.h
+-> tools/poly.cxx
+
+uint16   size
+Point[]  points
+
+
+PolyPolygon
+------------
+
+-> tools/poly.h
+-> tools/poly2.cxx
+
+uint16     size
+Polygon[]  polygons
+
+
+Rectangle
+----------
+
+-> tools/gen
+
+int32  left
+int32  top
+int32  right
+int32  bottom
+
+
+Color
+------
+
+-> tools/color
+
+uint16  colorName  (* if 0x8000 set, user color, else, defined color by code)
+uint16  red        (* only higher 8 bit used and replicated)
+uint16  green      (* only higher 8 bit used and replicated)
+uint16  blue       (* only higher 8 bit used and replicated)
+
+
+LineInfo
+---------
+
+-> vcl/lineinfo
+
+Version             version
+uint16 (LineStyle)  style
+int32               width
+
+---version 2---
+uint16              dashCount
+int32               dashLength
+uint16              dotCount
+int32               dotLength
+int32               distance
+
+---version 3---
+uint16 (LineJoin)   lineJoin
+
+
+String
+-------
+
+-> tools/stream
+
+---TEXTENCODING_UNICODE---
+int32   size
+char[]  chars  (* UTF-16)
+---else---
+byte[]  chars  (* ~US-ASCII)
+
+
+
+MapMode
+--------
+
+-> vcl/mapmod
+
+Version           version
+uint16 (MapUnit)  unit
+Point             origin
+Fraction          scaleX
+Fraction          scaleY
+boolean           isSimple
+
+
+Font
+-----
+
+-> vcl/font
+
+Version                    version
+String                     familyName  (* if unicode, (int32 prefix, UTF-16 string), otherwise, (uint16 prefix, byte string))
+String                     styleName   (* if unicode, (int32 prefix, UTF-16 string), otherwise, (uint16 prefix, byte string))
+Size                       size
+uint16 (TextEncoding)      charset
+uint16 (FontFamily)        family
+uint16 (FontPitch)         pitch
+uint16 (FontWeight)        weight
+uint16 (FontUnderline)     underline
+uint16 (FontStrikeout)     strikeout
+uint16 (FontItalic)        italic
+uint16 (LanguageType)      language
+uint16 (FontWidth)         width
+int16                      orientation
+boolean                    wordLine
+boolean                    outline
+boolean                    shadow
+uint8                      kerning
+
+---version 2---
+uint8 (FontRelief)         relief
+uint16 (LanguageType)      cjkLanguage
+boolean                    vertical
+uint16 (FontEmphasisMark)  emphasisMark
+
+---version 3---
+uint16 (FontUnderline)     overline
+
+
+RenderGraphic
+--------------
+
+-> vcl/rendergraphic
+
+Version  version
+String   dataMimeType  (* uint16 prefix, US-ASCII string)
+uint32   dataLength
+uint8[]  data
+
+
+GfxLink
+--------
+
+-> vcl/gfxlink
+
+TODO: check
+
+Version               version
+uint16 (GfxLinkType)  type
+uint32                dataSize
+uint32                userID
+
+---version 2---
+Size                  preferredSize
+MapMode               preferredMapMode
+uint8[]               data              TODO: ???
+
+
+Region
+-------
+
+-> vcl/region
+
+TODO: ???
+
+
+Bitmap
+-------
+
+-> vcl/bitmap
+
+TODO: ???
+
+
+BitmapEx
+---------
+
+-> vcl/bitmapex
+
+Bitmap                   bitmap
+uint32                   0x25091962  (* magic 1)
+uint32                   0xACB20201  (* magic 2)
+uint8 (TransparentType)  transparentType
+
+---if (transparentType == TRANSPARENT_BITMAP)---
+Bitmap                   transparentMask
+---else if (transparentType == TRANSPARENT_COLOR)---
+Color                    transparentColor

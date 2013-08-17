@@ -1,0 +1,14 @@
+-> vcl/gdimtf
+
+
+Header
+-------
+
+Version  version
+uint32   compressionMode
+MapMode  mapMode
+Size     size
+uint32   actionCount
+
+---version 2---
+uint8    renderGraphicReplacements

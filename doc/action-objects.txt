@@ -1,0 +1,496 @@
+-> vcl/metaact
+
+
+MetaAction
+-----------
+
+uint16 (MetaActionType)  type
+Version                  version
+
+
+MetaPixelAction
+----------------
+type = META_PIXEL_ACTION
+
+Point  point
+Color  color  (* as 32 bit value)
+
+
+MetaPointAction
+----------------
+type = META_POINT_ACTION
+
+Point  point
+
+
+MetaLineAction
+---------------
+type = META_LINE_ACTION
+
+LineInfo  lineInfo
+Point     startPoint
+Point     endPoint
+
+
+MetaRectAction
+---------------
+type = META_RECT_ACTION
+
+Rectangle  rectangle
+
+
+MetaRoundRectAction
+--------------------
+type = META_ROUNDRECT_ACTION
+
+Rectangle  rectangle
+uint32     horizontalRound
+uint32     verticalRound
+
+
+MetaEllipseAction
+------------------
+type = META_ELLIPSE_ACTION
+
+Rectangle  rectangle
+
+
+MetaArcAction
+--------------
+type = META_ARC_ACTION
+
+Rectangle  rectangle
+Point      startPoint
+Point      endPoint
+
+
+MetaPieAction
+--------------
+type = META_PIE_ACTION
+
+Rectangle  rectangle
+Point      startPoint
+Point      endPoint
+
+
+MetaChordAction
+----------------
+type = META_CHORD_ACTION
+
+Rectangle  rectangle
+Point      startPoint
+Point      endPoint
+
+
+MetaPolyLineAction
+-------------------
+type = META_POLYLINE_ACTION
+
+SimplePolygon  simplePolygon
+
+---version 2---
+LineInfo       lineInfo
+
+---version 3---
+boolean        hasFlags
+Polygon        polygon        (* only if flags)
+
+
+MetaPolygonAction
+------------------
+type = META_POLYGON_ACTION
+
+SimplePolygon   simplePolygon
+
+---version 2---
+boolean         hasFlags
+ComplexPolygon  complexPolygon  (* only if flags)
+
+
+MetaPolyPolygonAction
+----------------------
+type = META_POLYPOLYGON_ACTION
+
+PolyPolygon     simplePolygons
+
+---version 2---
+uint16          complexPolygonCount
+{
+uint16          simplePolygonIndex
+ComplexPolygon  complexPolygon
+} x complexPolygonCount
+
+
+MetaTextAction
+---------------
+type = META_TEXT_ACTION
+
+Point   point
+Sting   string  (* if unicode, (int32 prefix, UTF-16 string), otherwise, (uint16 prefix, byte string))
+uint16  off
+uint16  len
+
+---version 2---
+String  string  (* uint16 prefix, UTF-16 string)
+
+
+MetaTextArrayAction
+--------------------
+type = META_TEXTARRAY_ACTION
+
+Point    startpoint
+Sting    string      (* if unicode, (int32 prefix, UTF-16 string), otherwise, (uint16 prefix, byte string))
+uint16   off
+uint16   len
+uint32   dxArrayLen
+int32[]  dxArray     TODO: ???
+
+---version 2---
+String   string      (* uint16 prefix, UTF-16 string)
+
+
+MetaStretchTextAction
+----------------------
+type = META_STRETCHTEXT_ACTION
+
+Point   point
+Sting   string  (* if unicode, (int32 prefix, UTF-16 string), otherwise, (uint16 prefix, byte string))
+uint32  width
+uint16  off
+uint16  len
+
+---version 2---
+String  string  (* uint16 prefix, UTF-16 string)
+
+
+MetaTextRectangleAction
+------------------------
+type = META_TEXTRECT_ACTION
+
+Rectangle  rectangle
+Sting      string     (* if unicode, (int32 prefix, UTF-16 string), otherwise, (uint16 prefix, byte string))
+uint16     style      TODO: ???
+
+---version 2---
+String     string     (* uint16 prefix, UTF-16 string)
+
+
+MetaTextLineAction
+-------------------
+type = META_TEXTLINE_ACTION
+
+Point                   position
+int32                   width
+uint32 (FontStrikeout)  strikeout
+uint32 (FontUnderline)  underline
+
+---version 2---
+uint32 (FontUnderline)  overline
+
+
+MetaBitmapAction
+-----------------
+type = META_BMP_ACTION
+
+Bitmap  bitmap
+Point   point
+
+
+MetaBmpScaleAction
+-------------------
+type = META_BMPSCALE_ACTION
+
+Bitmap  bitmap
+Point   point
+Size    size
+
+
+MetaBmpScalePartAction
+-----------------------
+type = META_BMPEXSCALE_ACTION
+
+Bitmap  bitmap
+Point   destinationPoint
+Size    destinationSize
+Point   sourcePoint
+Size    sourceSize
+
+
+MetaBmpExAction
+----------------
+type = META_BMPEX_ACTION
+
+BitmapEx  bitmap
+Point     point
+
+
+MetaBmpExScaleAction
+---------------------
+type = META_BMPEXSCALE_ACTION
+
+BitmapEx  bitmap
+Point     point
+Size      size
+
+
+MetaBmpExScalePartAction
+-------------------------
+type = META_BMPEXSCALEPART_ACTION
+
+BitmapEx  bitmap
+Point     destinationPoint
+Size      destinationSize
+Point     sourcePoint
+Size      sourceSize
+
+
+MetaMaskAction
+---------------
+type = META_MASK_ACTION
+
+Bitmap  bitmap
+Point   point
+
+
+MetaMaskScaleAction
+--------------------
+type = META_MASKSCALE_ACTION
+
+Bitmap  bitmap
+Point   point
+Size    size
+
+
+MetaMaskScalePartAction
+------------------------
+type = META_MASKSCALEPART_ACTION
+
+Bitmap  bitmap
+Color   color             (* as 32 bit value)
+Point   destinationPoint
+Size    destinationSize
+Point   sourcePoint
+Size    sourceSize
+
+
+MetaGradientAction
+-------------------
+type = META_GRADIENT_ACTION
+
+Rectangle  rectangle
+Gradient   gradient
+
+
+MetaGradientExAction
+---------------------
+type = META_GRADIENTEX_ACTION
+
+SimplePolygon  simplePolygon
+Gradient       gradient
+
+
+MetaHatchAction
+----------------
+type = META_HATCH_ACTION
+
+SimplePolyPolygon  simplePolyPolygon
+Hatch              hatch
+
+
+MetaWallpaperAction
+--------------------
+type = META_WALLPAPER_ACTION
+
+Rectangle  rectangle
+Wallpaper  wallpaper
+
+
+MetaClipRegionAction
+---------------------
+type = META_CLIPREGION_ACTION
+
+Region   region  TODO: ???
+boolean  clip
+
+
+MetaISectRectClipRegionAction
+------------------------------
+type = META_ISECTRECTCLIPREGION_ACTION
+
+Rectangle  rectangle
+
+
+MetaISectRectClipRegionAction
+------------------------------
+type = META_ISECTREGIONCLIPREGION_ACTION
+
+Region  region  TODO: ???
+
+
+MetaMoveClipRegionAction
+-------------------------
+type = META_MOVECLIPREGION_ACTION
+
+int32  horizontalMove
+int32  verticalMove
+
+
+MetaLineColorAction
+--------------------
+type = META_LINECOLOR_ACTION
+
+Color    color  (* as 32 bit value)
+boolean  set
+
+
+MetaFillColorAction
+--------------------
+type = META_FILLCOLOR_ACTION
+
+Color    color  (* as 32 bit value)
+boolean  set
+
+
+MetaTextColorAction
+--------------------
+type = META_TEXTCOLOR_ACTION
+
+Color  color  (* as 32 bit value)
+
+
+MetaTextFillColorAction
+------------------------
+type = META_TEXTFILLCOLOR_ACTION
+
+Color    color  (* as 32 bit value)
+boolean  set
+
+
+MetaTextLineColorAction
+------------------------
+type = META_TEXTLINECOLOR_ACTION
+
+Color    color  (* as 32 bit value)
+boolean  set
+
+
+MetaOverlineColorAction
+------------------------
+type = META_OVERLINECOLOR_ACTION
+
+Color    color  (* as 32 bit value)
+boolean  set
+
+
+MetaTextAlignAction
+--------------------
+type = META_TEXTALIGN_ACTION
+
+uint16 (TextAlign)  align
+
+
+MetaMapModeAction
+------------------
+type = META_MAPMODE_ACTION
+
+MapMode  mapMode
+
+
+MetaFontAction
+---------------
+type = META_FONT_ACTION
+
+Font  font
+
+
+MetaPushAction
+---------------
+type = META_PUSH_ACTION
+
+uint16 (Push)  flags
+
+
+MetaPopAction
+--------------
+type = META_POP_ACTION
+
+(* empty)
+
+
+MetaRasterOpAction
+-------------------
+type = META_RASTEROP_ACTION
+
+uint16 (RasterOp)  rasterOperation
+
+
+MetaTransparentAction
+----------------------
+type = META_TRANSPARENT_ACTION
+
+SimplePolyPolygon  simplePolyPolygon
+uint16             transparentPercentage
+
+
+MetaFloatTransparentAction
+---------------------------
+type = META_FLOATTRANSPARENT_ACTION
+
+MetaFile  metaFile
+Point     point
+Size      size
+Gradient  gradient
+
+
+MetaEPSAction
+--------------
+type = META_EPS_ACTION
+
+GfxLink      gfxLink  TODO: ???
+Point        point
+Size         size
+GDIMetaFile  subset
+
+
+MetaRefPointAction
+-------------------
+type = META_REFPOINT_ACTION
+
+Point    referencePoint
+boolean  set
+
+
+MetaCommentAction
+------------------
+type = META_COMMENT_ACTION
+
+String   comment  (* uint16 prefix, us-ascii string)
+int32    value
+uint32   dataSize
+uint8[]  data
+
+
+MetaLayoutModeAction
+---------------------
+type = META_LAYOUTMODE_ACTION
+
+uint32  layoutMode  TODO: ???
+
+
+MetaTextLanguageAction
+-----------------------
+type = META_TEXTLANGUAGE_ACTION
+
+uint16 (LanguageType)  language
+
+
+MetaRenderGraphicAction
+------------------------
+type = META_RENDERGRAPHIC_ACTION
+
+RenderGraphic  renderGraphic
+Point          point
+Size           size
+double         rotateAngle
+double         shearAngleX
+double         shearAngleY
