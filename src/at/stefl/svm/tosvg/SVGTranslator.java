@@ -24,9 +24,11 @@ import at.stefl.svm.tosvg.action.TextColorActionTranslator;
 
 public class SVGTranslator {
 
+    public static final SVGTranslator TRANSLATOR = new SVGTranslator();
+
     private final Map<Class<? extends SVMAction>, SVGActionTranslator<? extends SVMAction>> translatorMap = new HashMap<Class<? extends SVMAction>, SVGActionTranslator<? extends SVMAction>>();
 
-    public SVGTranslator() {
+    private SVGTranslator() {
 	addTranslator(FillColorActionTranslator.TRANSLATOR);
 	addTranslator(LineColorActionTranslator.TRANSLATOR);
 	addTranslator(TextColorActionTranslator.TRANSLATOR);
@@ -79,7 +81,7 @@ public class SVGTranslator {
 	}
 
 	writer.writeFooter();
-	writer.close();
+	writer.flush();
     }
 
 }

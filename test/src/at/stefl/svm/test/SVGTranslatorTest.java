@@ -15,8 +15,7 @@ public class SVGTranslatorTest {
 	InputStream in = SVMListingTest.class.getResourceAsStream("test.svm");
 	OutputStream out = new FileOutputStream(file);
 
-	SVGTranslator translator = new SVGTranslator();
-	translator.translate(in, out);
+	SVGTranslator.TRANSLATOR.translate(in, out);
 
 	Runtime.getRuntime().exec("google-chrome " + file.getAbsolutePath());
     }

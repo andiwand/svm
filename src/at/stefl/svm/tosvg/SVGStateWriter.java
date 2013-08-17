@@ -148,6 +148,7 @@ public class SVGStateWriter {
 	    out.write("" + point.getX());
 	    out.write(",");
 	    out.write("" + point.getY());
+	    // TODO: remove on last
 	    out.write(" ");
 	}
     }
@@ -254,7 +255,12 @@ public class SVGStateWriter {
 	attributeWriteable = false;
     }
 
+    public void flush() throws IOException {
+	out.flush();
+    }
+
     public void close() throws IOException {
+	flush();
 	out.close();
     }
 
