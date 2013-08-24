@@ -1,7 +1,7 @@
 package at.stefl.svm.enumeration;
 
 public class ActionTypeConstants {
-
+    
     public static final int META_NULL_ACTION = 0;
     public static final int META_PIXEL_ACTION = 100;
     public static final int META_POINT_ACTION = 101;
@@ -57,8 +57,7 @@ public class ActionTypeConstants {
     public static final int META_OVERLINECOLOR_ACTION = 151;
     public static final int META_RENDERGRAPHIC_ACTION = 152;
     public static final int META_COMMENT_ACTION = 512;
-
-    private ActionTypeConstants() {
-    }
-
+    
+    private ActionTypeConstants() {}
+    
 }

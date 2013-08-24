@@ -3,12 +3,12 @@ package at.stefl.svm.tosvg.action;
 import at.stefl.svm.object.action.TextColorAction;
 
 public class TextColorActionTranslator extends
-	ColorActionTranslator<TextColorAction> {
-
+        ColorActionTranslator<TextColorAction> {
+    
     public static final TextColorActionTranslator TRANSLATOR = new TextColorActionTranslator();
-
+    
     private TextColorActionTranslator() {
-	super(TextColorAction.class, "fill");
+        super(TextColorAction.class, "fill");
     }
-
+    
 }

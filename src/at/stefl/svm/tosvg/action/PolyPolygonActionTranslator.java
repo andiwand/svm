@@ -9,20 +9,20 @@ import at.stefl.svm.tosvg.SVGStateWriter;
 import at.stefl.svm.tosvg.SVGUtil;
 
 public class PolyPolygonActionTranslator extends
-	SVGActionTranslator<PolyPolygonAction> {
-
+        SVGActionTranslator<PolyPolygonAction> {
+    
     public static final PolyPolygonActionTranslator TRANSLATOR = new PolyPolygonActionTranslator();
-
+    
     private PolyPolygonActionTranslator() {
-	super(PolyPolygonAction.class);
+        super(PolyPolygonAction.class);
     }
-
+    
     @Override
     protected void translateImpl(PolyPolygonAction action, SVGStateWriter out)
-	    throws IOException {
-	for (List<Vector2i> points : action.getSimplePolyPolygon()) {
-	    out.writePolygon(SVGUtil.getPoints(points));
-	}
+            throws IOException {
+        for (List<Vector2i> points : action.getSimplePolyPolygon()) {
+            out.writePolygon(SVGUtil.getPoints(points));
+        }
     }
-
+    
 }

@@ -7,18 +7,18 @@ import at.stefl.svm.tosvg.SVGStateWriter;
 import at.stefl.svm.tosvg.SVGUtil;
 
 public class PolyLineActionTranslator extends
-	SVGActionTranslator<PolyLineAction> {
-
+        SVGActionTranslator<PolyLineAction> {
+    
     public static final PolyLineActionTranslator TRANSLATOR = new PolyLineActionTranslator();
-
+    
     private PolyLineActionTranslator() {
-	super(PolyLineAction.class);
+        super(PolyLineAction.class);
     }
-
+    
     @Override
     protected void translateImpl(PolyLineAction action, SVGStateWriter out)
-	    throws IOException {
-	out.writePolyLine(SVGUtil.getPoints(action.getSimplePolygon()));
+            throws IOException {
+        out.writePolyLine(SVGUtil.getPoints(action.getSimplePolygon()));
     }
-
+    
 }

@@ -6,26 +6,25 @@ import at.stefl.svm.object.action.SVMAction;
 import at.stefl.svm.tosvg.SVGStateWriter;
 
 public abstract class SVGActionTranslator<T extends SVMAction> {
-
+    
     private final Class<T> actionClass;
-
+    
     public SVGActionTranslator(Class<T> actionClass) {
-	this.actionClass = actionClass;
+        this.actionClass = actionClass;
     }
-
+    
     public Class<T> getActionClass() {
-	return actionClass;
+        return actionClass;
     }
-
+    
     @SuppressWarnings("unchecked")
     public void translate(SVMAction action, SVGStateWriter out)
-	    throws IOException {
-	if (!actionClass.isAssignableFrom(action.getClass()))
-	    throw new IllegalArgumentException();
-	translateImpl((T) action, out);
+            throws IOException {
+        if (!actionClass.isAssignableFrom(action.getClass())) throw new IllegalArgumentException();
+        translateImpl((T) action, out);
     }
-
+    
     protected abstract void translateImpl(T action, SVGStateWriter out)
-	    throws IOException;
-
+            throws IOException;
+    
 }

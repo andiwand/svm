@@ -7,17 +7,17 @@ import at.stefl.svm.tosvg.SVGStateWriter;
 import at.stefl.svm.tosvg.SVGUtil;
 
 public class PolygonActionTranslator extends SVGActionTranslator<PolygonAction> {
-
+    
     public static final PolygonActionTranslator TRANSLATOR = new PolygonActionTranslator();
-
+    
     private PolygonActionTranslator() {
-	super(PolygonAction.class);
+        super(PolygonAction.class);
     }
-
+    
     @Override
     protected void translateImpl(PolygonAction action, SVGStateWriter out)
-	    throws IOException {
-	out.writePolygon(SVGUtil.getPoints(action.getSimplePolygon()));
+            throws IOException {
+        out.writePolygon(SVGUtil.getPoints(action.getSimplePolygon()));
     }
-
+    
 }

@@ -7,35 +7,35 @@ import at.stefl.svm.tosvg.SVGStateWriter;
 import at.stefl.svm.tosvg.SVGUtil;
 
 public abstract class ColorActionTranslator<T extends ColorAction> extends
-	SVGActionTranslator<T> {
-
+        SVGActionTranslator<T> {
+    
     private static final String OPACITY_ELEMENT_SUFFIX = "-opacity";
-
+    
     private final String colorElement;
     private final String opacityElement;
-
+    
     public ColorActionTranslator(Class<T> actionClass, String colorElement) {
-	super(actionClass);
-
-	this.colorElement = colorElement;
-	this.opacityElement = colorElement + OPACITY_ELEMENT_SUFFIX;
+        super(actionClass);
+        
+        this.colorElement = colorElement;
+        this.opacityElement = colorElement + OPACITY_ELEMENT_SUFFIX;
     }
-
+    
     @Override
     protected void translateImpl(T action, SVGStateWriter out)
-	    throws IOException {
-	out.addCurrentStyle(colorElement,
-		SVGUtil.getColorAttribute(action.getColor()));
-
-	if (isColorSet(action)) {
-	    out.removeCurrentStyle(opacityElement);
-	} else {
-	    out.addCurrentStyle(opacityElement, "0.0");
-	}
+            throws IOException {
+        out.addCurrentStyle(colorElement,
+                SVGUtil.getColorAttribute(action.getColor()));
+        
+        if (isColorSet(action)) {
+            out.removeCurrentStyle(opacityElement);
+        } else {
+            out.addCurrentStyle(opacityElement, "0.0");
+        }
     }
-
+    
     protected boolean isColorSet(T action) {
-	return true;
+        return true;
     }
-
+    
 }

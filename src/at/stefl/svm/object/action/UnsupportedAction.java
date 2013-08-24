@@ -10,67 +10,67 @@ import at.stefl.svm.io.SVMDataOutputStream;
 
 // TODO: remove me (debugging only)
 public class UnsupportedAction extends SVMAction {
-
+    
     private ActionType actionType;
     private int version;
     private byte[] data;
-
+    
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
-	builder.append("UnsupportedAction [actionType=");
-	builder.append(actionType);
-	builder.append(", version=");
-	builder.append(version);
-	builder.append(", length=");
-	builder.append(data.length);
-	builder.append(", data=");
-	builder.append(ArrayUtil.toStringHex(data));
-	builder.append("]");
-	return builder.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("UnsupportedAction [actionType=");
+        builder.append(actionType);
+        builder.append(", version=");
+        builder.append(version);
+        builder.append(", length=");
+        builder.append(data.length);
+        builder.append(", data=");
+        builder.append(ArrayUtil.toStringHex(data));
+        builder.append("]");
+        return builder.toString();
     }
-
+    
     @Override
     public ActionType getActionType() {
-	return actionType;
+        return actionType;
     }
-
+    
     @Override
     public int getVersion() {
-	return version;
+        return version;
     }
-
+    
     public byte[] getData() {
-	return data;
+        return data;
     }
-
+    
     public void setActionType(ActionType actionType) {
-	this.actionType = actionType;
+        this.actionType = actionType;
     }
-
+    
     public void setVersion(int version) {
-	this.version = version;
+        this.version = version;
     }
-
+    
     public void setData(byte[] data) {
-	this.data = data;
+        this.data = data;
     }
-
+    
     @Override
     protected void serializeContent(SVMDataOutputStream out) throws IOException {
-	out.write(data);
+        out.write(data);
     }
-
+    
     @Override
     protected void deserializeContent(SVMDataInputStream in, int version,
-	    long length) throws IOException {
-	this.version = version;
-
-	if (length <= Integer.MAX_VALUE) {
-	    data = ByteStreamUtil.readFully(in, (int) length);
-	} else {
-	    data = null;
-	}
+            long length) throws IOException {
+        this.version = version;
+        
+        if (length <= Integer.MAX_VALUE) {
+            data = ByteStreamUtil.readFully(in, (int) length);
+        } else {
+            data = null;
+        }
     }
-
+    
 }

@@ -8,53 +8,53 @@ import at.stefl.svm.io.SVMDataInputStream;
 import at.stefl.svm.io.SVMDataOutputStream;
 
 public class PixelAction extends SVMAction {
-
+    
     private Vector2i point;
     private Color color;
-
+    
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder();
-	builder.append("PixelAction [point=");
-	builder.append(point);
-	builder.append(", color=");
-	builder.append(color);
-	builder.append("]");
-	return builder.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("PixelAction [point=");
+        builder.append(point);
+        builder.append(", color=");
+        builder.append(color);
+        builder.append("]");
+        return builder.toString();
     }
-
+    
     public Vector2i getPoint() {
-	return point;
+        return point;
     }
-
+    
     public Color getColorDefinition() {
-	return color;
+        return color;
     }
-
+    
     public void setPoint(Vector2i point) {
-	this.point = point;
+        this.point = point;
     }
-
+    
     public void setColorDefinition(Color color) {
-	this.color = color;
+        this.color = color;
     }
-
+    
     @Override
     protected int getVersion() {
-	return 1;
+        return 1;
     }
-
+    
     @Override
     protected void serializeContent(SVMDataOutputStream out) throws IOException {
-	out.writePoint(point);
-	out.writeColorInt(color);
+        out.writePoint(point);
+        out.writeColorInt(color);
     }
-
+    
     @Override
     protected void deserializeContent(SVMDataInputStream in, int version,
-	    long length) throws IOException {
-	point = in.readPoint();
-	color = in.readColorInt();
+            long length) throws IOException {
+        point = in.readPoint();
+        color = in.readColorInt();
     }
-
+    
 }

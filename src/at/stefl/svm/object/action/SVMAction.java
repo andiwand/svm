@@ -7,14 +7,14 @@ import at.stefl.svm.io.SVMDataInputStream;
 import at.stefl.svm.object.SVMVersionObject;
 
 public abstract class SVMAction extends SVMVersionObject {
-
+    
     public ActionType getActionType() {
-	return ActionType.getByClass(getClass());
+        return ActionType.getByClass(getClass());
     }
-
+    
     @Override
     public SVMAction deserialize(SVMDataInputStream in) throws IOException {
-	return (SVMAction) super.deserialize(in);
+        return (SVMAction) super.deserialize(in);
     }
-
+    
 }

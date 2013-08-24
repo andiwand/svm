@@ -23,65 +23,64 @@ import at.stefl.svm.tosvg.action.TextArrayActionTranslator;
 import at.stefl.svm.tosvg.action.TextColorActionTranslator;
 
 public class SVGTranslator {
-
+    
     public static final SVGTranslator TRANSLATOR = new SVGTranslator();
-
+    
     private final Map<Class<? extends SVMAction>, SVGActionTranslator<? extends SVMAction>> translatorMap = new HashMap<Class<? extends SVMAction>, SVGActionTranslator<? extends SVMAction>>();
-
+    
     private SVGTranslator() {
-	addTranslator(FillColorActionTranslator.TRANSLATOR);
-	addTranslator(LineColorActionTranslator.TRANSLATOR);
-	addTranslator(TextColorActionTranslator.TRANSLATOR);
-
-	addTranslator(RectangleActionTranslator.TRANSLATOR);
-	addTranslator(PolyLineActionTranslator.TRANSLATOR);
-	addTranslator(PolygonActionTranslator.TRANSLATOR);
-	addTranslator(PolyPolygonActionTranslator.TRANSLATOR);
-
-	addTranslator(FontActionTranslator.TRANSLATOR);
-
-	addTranslator(TextActionTranslator.TRANSLATOR);
-	addTranslator(TextArrayActionTranslator.TRANSLATOR);
+        addTranslator(FillColorActionTranslator.TRANSLATOR);
+        addTranslator(LineColorActionTranslator.TRANSLATOR);
+        addTranslator(TextColorActionTranslator.TRANSLATOR);
+        
+        addTranslator(RectangleActionTranslator.TRANSLATOR);
+        addTranslator(PolyLineActionTranslator.TRANSLATOR);
+        addTranslator(PolygonActionTranslator.TRANSLATOR);
+        addTranslator(PolyPolygonActionTranslator.TRANSLATOR);
+        
+        addTranslator(FontActionTranslator.TRANSLATOR);
+        
+        addTranslator(TextActionTranslator.TRANSLATOR);
+        addTranslator(TextArrayActionTranslator.TRANSLATOR);
     }
-
+    
     public void addTranslator(
-	    SVGActionTranslator<? extends SVMAction> translator) {
-	translatorMap.put(translator.getActionClass(), translator);
+            SVGActionTranslator<? extends SVMAction> translator) {
+        translatorMap.put(translator.getActionClass(), translator);
     }
-
+    
     public void removeTranslator(Class<? extends SVMAction> actionClass) {
-	translatorMap.remove(actionClass);
+        translatorMap.remove(actionClass);
     }
-
+    
     public void removeTranslator(
-	    SVGActionTranslator<? extends SVMAction> translator) {
-	removeTranslator(translator.getActionClass());
+            SVGActionTranslator<? extends SVMAction> translator) {
+        removeTranslator(translator.getActionClass());
     }
-
+    
     public void translate(InputStream in, OutputStream out) throws IOException {
-	SVMReader reader = new SVMReader(in);
-	SVGStateWriter writer = new SVGStateWriter(new LWXMLStreamWriter(out));
-
-	SVMHeader header = reader.readHeader();
-
-	writer.writeHeader();
-	writer.writeAttribute("viewBox", "0 0 " + header.getSize().getX() + " "
-		+ header.getSize().getY());
-
-	writer.addCurrentStyle("vector-effect", "non-scaling-stroke");
-
-	SVMAction action;
-	while ((action = reader.readAction()) != null) {
-	    Class<? extends SVMAction> actionClass = action.getClass();
-	    SVGActionTranslator<? extends SVMAction> translator = translatorMap
-		    .get(actionClass);
-	    if (translator == null)
-		continue;
-	    translator.translate(action, writer);
-	}
-
-	writer.writeFooter();
-	writer.flush();
+        SVMReader reader = new SVMReader(in);
+        SVGStateWriter writer = new SVGStateWriter(new LWXMLStreamWriter(out));
+        
+        SVMHeader header = reader.readHeader();
+        
+        writer.writeHeader();
+        writer.writeAttribute("viewBox", "0 0 " + header.getSize().getX() + " "
+                + header.getSize().getY());
+        
+        writer.addCurrentStyle("vector-effect", "non-scaling-stroke");
+        
+        SVMAction action;
+        while ((action = reader.readAction()) != null) {
+            Class<? extends SVMAction> actionClass = action.getClass();
+            SVGActionTranslator<? extends SVMAction> translator = translatorMap
+                    .get(actionClass);
+            if (translator == null) continue;
+            translator.translate(action, writer);
+        }
+        
+        writer.writeFooter();
+        writer.flush();
     }
-
+    
 }

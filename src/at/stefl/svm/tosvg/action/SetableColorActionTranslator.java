@@ -3,16 +3,16 @@ package at.stefl.svm.tosvg.action;
 import at.stefl.svm.object.action.SetableColorAction;
 
 public class SetableColorActionTranslator<T extends SetableColorAction> extends
-	ColorActionTranslator<T> {
-
+        ColorActionTranslator<T> {
+    
     public SetableColorActionTranslator(Class<T> actionClass,
-	    String colorElement) {
-	super(actionClass, colorElement);
+            String colorElement) {
+        super(actionClass, colorElement);
     }
-
+    
     @Override
     protected boolean isColorSet(T action) {
-	return action.isSet();
+        return action.isSet();
     }
-
+    
 }
