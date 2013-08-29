@@ -2,10 +2,11 @@
 <project basedir="." default="make-jar" name="svm">
 	<property name="target" value="1.6" />
 	<property name="source" value="1.6" />
-	<property name="jar" value="svm" />
+	<property name="jar" value="svm.jar" />
 	
-	<path id="commons.classpath">
+	<path id="classpath">
 		<pathelement location="bin" />
+		<pathelement location="dep/commons/bin" />
 	</path>
 	
 	<target name="init">
@@ -23,7 +24,7 @@
 	
 	<target name="make" depends="init">
 		<javac srcdir="src" destdir="bin" source="${source}" target="${target}" includeantruntime="true">
-			<classpath refid="commons.classpath" />
+			<classpath refid="classpath" />
 		</javac>
 	</target>
 	
