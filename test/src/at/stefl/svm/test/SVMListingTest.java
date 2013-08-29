@@ -13,7 +13,12 @@ import at.stefl.svm.object.action.UnsupportedAction;
 public class SVMListingTest {
     
     public static void main(String[] args) throws Throwable {
+        // JFileChooser chooser = new JFileChooser();
+        // chooser.showOpenDialog(null);
+        // InputStream in = new FileInputStream(chooser.getSelectedFile());
+        
         InputStream in = SVMListingTest.class.getResourceAsStream("test.svm");
+        
         SVMReader reader = new SVMReader(in);
         
         SVMHeader header = reader.readHeader();

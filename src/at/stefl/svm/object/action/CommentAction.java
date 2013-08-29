@@ -20,7 +20,7 @@ public class CommentAction extends SVMAction {
         builder.append(", value=");
         builder.append(value);
         builder.append(", data=");
-        builder.append(ArrayUtil.toStringHex(data));
+        builder.append(ArrayUtil.toHexString(data));
         builder.append("]");
         return builder.toString();
     }

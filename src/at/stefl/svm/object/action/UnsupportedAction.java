@@ -25,7 +25,7 @@ public class UnsupportedAction extends SVMAction {
         builder.append(", length=");
         builder.append(data.length);
         builder.append(", data=");
-        builder.append(ArrayUtil.toStringHex(data));
+        builder.append(ArrayUtil.toHexString(data));
         builder.append("]");
         return builder.toString();
     }
