@@ -194,7 +194,6 @@ public class TextEncodingConstants {
     
     public static final int RTL_TEXTENCODING_UCS4 = 0xFFFE;
     public static final int RTL_TEXTENCODING_UCS2 = 0xFFFF;
-    public static final int RTL_TEXTENCODING_UNICODE = RTL_TEXTENCODING_UCS2;
     
     private TextEncodingConstants() {}
     

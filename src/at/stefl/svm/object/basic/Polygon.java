@@ -8,28 +8,28 @@ import at.stefl.svm.enumeration.PolygonFlag;
 // TODO: extend MetaObject
 // TODO: figure out format
 public class Polygon {
-    
+
     private List<Vector2i> points;
     private List<PolygonFlag> flags;
-    
+
     public List<Vector2i> getPoints() {
-        return points;
+	return points;
     }
-    
+
     public boolean hasFlags() {
-        return flags != null;
+	return flags != null;
     }
-    
+
     public List<PolygonFlag> getFlags() {
-        return flags;
+	return flags;
     }
-    
+
     public void setPoints(List<Vector2i> points) {
-        this.points = points;
+	this.points = points;
     }
-    
+
     public void setFlags(List<PolygonFlag> flags) {
-        this.flags = flags;
+	this.flags = flags;
     }
-    
+
 }
