@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import at.stefl.commons.io.CloseableOutputStream;
 import at.stefl.commons.lwxml.writer.LWXMLStreamWriter;
 import at.stefl.svm.io.SVMReader;
 import at.stefl.svm.object.SVMHeader;
@@ -42,6 +43,8 @@ public class SVGTranslator {
         
         addTranslator(TextActionTranslator.TRANSLATOR);
         addTranslator(TextArrayActionTranslator.TRANSLATOR);
+        
+        //TODO: implement MapModeActionTranslator
     }
     
     public void addTranslator(
@@ -60,7 +63,9 @@ public class SVGTranslator {
     
     public void translate(InputStream in, OutputStream out) throws IOException {
         SVMReader reader = new SVMReader(in);
-        SVGStateWriter writer = new SVGStateWriter(new LWXMLStreamWriter(out));
+        // TODO: closeable?
+        SVGStateWriter writer = new SVGStateWriter(new LWXMLStreamWriter(
+                new CloseableOutputStream(out)));
         
         SVMHeader header = reader.readHeader();
         
@@ -81,6 +86,7 @@ public class SVGTranslator {
         
         writer.writeFooter();
         writer.flush();
+        writer.close();
     }
     
 }

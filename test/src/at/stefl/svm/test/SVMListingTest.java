@@ -1,8 +1,11 @@
 package at.stefl.svm.test;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.EnumSet;
 import java.util.Set;
+
+import javax.swing.JFileChooser;
 
 import at.stefl.svm.enumeration.ActionType;
 import at.stefl.svm.io.SVMReader;
@@ -13,11 +16,12 @@ import at.stefl.svm.object.action.UnsupportedAction;
 public class SVMListingTest {
     
     public static void main(String[] args) throws Throwable {
-        // JFileChooser chooser = new JFileChooser();
-        // chooser.showOpenDialog(null);
-        // InputStream in = new FileInputStream(chooser.getSelectedFile());
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        InputStream in = new FileInputStream(chooser.getSelectedFile());
         
-        InputStream in = SVMListingTest.class.getResourceAsStream("test.svm");
+        // InputStream in =
+        // SVMListingTest.class.getResourceAsStream("test.svm");
         
         SVMReader reader = new SVMReader(in);
         

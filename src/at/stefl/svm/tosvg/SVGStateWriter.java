@@ -256,7 +256,6 @@ public class SVGStateWriter {
     }
     
     public void close() throws IOException {
-        flush();
         out.close();
     }
     
