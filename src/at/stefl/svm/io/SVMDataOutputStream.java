@@ -105,7 +105,7 @@ public class SVMDataOutputStream extends ByteDataOutputStream {
     }
 
     public void writeColorInt(Color color) throws IOException {
-	writeInt(color.getRGBA());
+	writeInt(color.getARGB());
     }
 
     public void writeUnsignedShortPrefixedAsciiString(String string)

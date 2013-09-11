@@ -2,14 +2,14 @@ package at.stefl.svm.object;
 
 public class Color {
 
-    private final int rgba;
+    private final int argb;
 
     public Color(int rgb) {
-	this.rgba = 0xff000000 | rgb;
+	this.argb = 0xff000000 | rgb;
     }
 
     public Color(int red, int green, int blue) {
-	this.rgba = 0xff000000 | ((red & 0xff) << 16) | ((green & 0xff) << 8)
+	this.argb = 0xff000000 | ((red & 0xff) << 16) | ((green & 0xff) << 8)
 		| ((blue & 0xff) << 0);
     }
 
@@ -29,32 +29,32 @@ public class Color {
 	if (!(obj instanceof Color))
 	    return false;
 
-	return rgba == ((Color) obj).rgba;
+	return argb == ((Color) obj).argb;
     }
 
     @Override
     public int hashCode() {
-	return rgba;
+	return argb;
     }
 
-    public int getRGBA() {
-	return rgba;
+    public int getARGB() {
+	return argb;
     }
 
     public int getAlpha() {
-	return (rgba >> 24) & 0xff;
+	return (argb >> 24) & 0xff;
     }
 
     public int getRed() {
-	return (rgba >> 16) & 0xff;
+	return (argb >> 16) & 0xff;
     }
 
     public int getGreen() {
-	return (rgba >> 8) & 0xff;
+	return (argb >> 8) & 0xff;
     }
 
     public int getBlue() {
-	return (rgba >> 0) & 0xff;
+	return (argb >> 0) & 0xff;
     }
 
 }
