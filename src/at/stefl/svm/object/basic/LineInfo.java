@@ -20,6 +20,8 @@ public class LineInfo extends SVMVersionObject {
     
     private int lineJoin;
     
+    // TODO: implement version 4
+    
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -130,6 +132,8 @@ public class LineInfo extends SVMVersionObject {
         
         // version 3
         out.writeUnsignedShort(lineJoin);
+        
+        // TODO: implement version 4
     }
     
     @Override
@@ -148,6 +152,8 @@ public class LineInfo extends SVMVersionObject {
             if (version >= 3) {
                 lineJoin = in.readUnsignedShort();
             }
+            
+            // TODO: implement version 4
         }
     }
     

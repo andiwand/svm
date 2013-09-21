@@ -12,42 +12,42 @@ import at.stefl.svm.io.SVMDataOutputStream;
 // TODO: check input/output size
 // TODO: reduce in/out stream chain
 public abstract class SVMVersionObject extends SVMObject {
-
+    
     private long countLength() throws IOException {
-	CountingOutputStream counter = new CountingOutputStream(
-		NullOutputStream.NULL);
-	serializeContent(new SVMDataOutputStream(counter));
-	return counter.count();
+        CountingOutputStream counter = new CountingOutputStream(
+                NullOutputStream.NULL);
+        serializeContent(new SVMDataOutputStream(counter));
+        return counter.count();
     }
-
+    
     @Override
     public void serialize(SVMDataOutputStream out) throws IOException {
-	out.writeUnsignedShort(getVersion());
-	out.writeUnsignedInt(countLength());
-
-	serializeContent(out);
+        out.writeUnsignedShort(getVersion());
+        out.writeUnsignedInt(countLength());
+        
+        serializeContent(out);
     }
-
+    
     @Override
     public SVMVersionObject deserialize(SVMDataInputStream in)
-	    throws IOException {
-	int version = in.readUnsignedShort();
-	long length = in.readUnsignedInt();
-
-	in = new SVMDataInputStream(new LimitedInputStream(in, length), in);
-	deserializeContent(in, version, length);
-
-	ByteStreamUtil.flushBytewise(in);
-
-	return this;
+            throws IOException {
+        int version = in.readUnsignedShort();
+        long length = in.readUnsignedInt();
+        
+        in = new SVMDataInputStream(new LimitedInputStream(in, length), in);
+        deserializeContent(in, version, length);
+        
+        ByteStreamUtil.flushBytewise(in);
+        
+        return this;
     }
-
+    
     protected abstract int getVersion();
-
+    
     protected abstract void serializeContent(SVMDataOutputStream out)
-	    throws IOException;
-
+            throws IOException;
+    
     protected abstract void deserializeContent(SVMDataInputStream in,
-	    int version, long length) throws IOException;
-
+            int version, long length) throws IOException;
+    
 }

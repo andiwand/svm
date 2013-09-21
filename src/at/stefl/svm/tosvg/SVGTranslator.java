@@ -44,7 +44,7 @@ public class SVGTranslator {
         addTranslator(TextActionTranslator.TRANSLATOR);
         addTranslator(TextArrayActionTranslator.TRANSLATOR);
         
-        //TODO: implement MapModeActionTranslator
+        // TODO: implement MapModeActionTranslator
     }
     
     public void addTranslator(

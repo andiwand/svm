@@ -52,23 +52,28 @@ public class LineAction extends SVMAction {
     
     @Override
     protected int getVersion() {
-        return 1;
+        return 2;
     }
     
     @Override
     protected void serializeContent(SVMDataOutputStream out) throws IOException {
-        lineInfo.serialize(out);
         out.writePoint(startPoint);
         out.writePoint(endPoint);
+        
+        // version 2
+        lineInfo.serialize(out);
     }
     
     @Override
     protected void deserializeContent(SVMDataInputStream in, int version,
             long length) throws IOException {
-        lineInfo = new LineInfo();
-        lineInfo.deserialize(in);
         startPoint = in.readPoint();
         endPoint = in.readPoint();
+        
+        if (version >= 2) {
+            lineInfo = new LineInfo();
+            lineInfo.deserialize(in);
+        }
     }
     
 }
