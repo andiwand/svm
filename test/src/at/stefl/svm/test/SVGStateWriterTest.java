@@ -1,9 +1,12 @@
 package at.stefl.svm.test;
 
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 import at.stefl.commons.math.vector.Vector2d;
 import at.stefl.svm.tosvg.SVGStateWriter;
+import at.stefl.svm.tosvg.SVGStateWriter.StyleCallback;
 
 public class SVGStateWriterTest {
     
@@ -15,8 +18,12 @@ public class SVGStateWriterTest {
         
         out.writeHeader();
         
-        out.addCurrentStyle("fill", "rgb(255, 0, 0)");
-        out.writeCircle(new Vector2d(50, 50), 50);
+        out.writeCircle(new Vector2d(50, 50), 50, new StyleCallback() {
+            @Override
+            public void writeStyle(Writer out) throws IOException {
+                out.write("fill:rgb(255, 0, 0);");
+            }
+        });
         
         out.writeFooter();
         out.close();

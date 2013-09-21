@@ -14,6 +14,7 @@ import at.stefl.svm.object.action.SVMAction;
 import at.stefl.svm.tosvg.action.FillColorActionTranslator;
 import at.stefl.svm.tosvg.action.FontActionTranslator;
 import at.stefl.svm.tosvg.action.LineColorActionTranslator;
+import at.stefl.svm.tosvg.action.MapModeTranslator;
 import at.stefl.svm.tosvg.action.PolyLineActionTranslator;
 import at.stefl.svm.tosvg.action.PolyPolygonActionTranslator;
 import at.stefl.svm.tosvg.action.PolygonActionTranslator;
@@ -30,6 +31,8 @@ public class SVGTranslator {
     private final Map<Class<? extends SVMAction>, SVGActionTranslator<? extends SVMAction>> translatorMap = new HashMap<Class<? extends SVMAction>, SVGActionTranslator<? extends SVMAction>>();
     
     private SVGTranslator() {
+        addTranslator(MapModeTranslator.TRANSLATOR);
+        
         addTranslator(FillColorActionTranslator.TRANSLATOR);
         addTranslator(LineColorActionTranslator.TRANSLATOR);
         addTranslator(TextColorActionTranslator.TRANSLATOR);
@@ -43,8 +46,6 @@ public class SVGTranslator {
         
         addTranslator(TextActionTranslator.TRANSLATOR);
         addTranslator(TextArrayActionTranslator.TRANSLATOR);
-        
-        // TODO: implement MapModeActionTranslator
     }
     
     public void addTranslator(
@@ -69,11 +70,12 @@ public class SVGTranslator {
         
         SVMHeader header = reader.readHeader();
         
+        TranslationState state = new TranslationState();
+        state.setMapMode(header.getMapMode());
+        
         writer.writeHeader();
         writer.writeAttribute("viewBox", "0 0 " + header.getSize().getX() + " "
                 + header.getSize().getY());
-        
-        writer.addCurrentStyle("vector-effect", "non-scaling-stroke");
         
         SVMAction action;
         while ((action = reader.readAction()) != null) {
@@ -81,7 +83,7 @@ public class SVGTranslator {
             SVGActionTranslator<? extends SVMAction> translator = translatorMap
                     .get(actionClass);
             if (translator == null) continue;
-            translator.translate(action, writer);
+            translator.translate(action, writer, state);
         }
         
         writer.writeFooter();

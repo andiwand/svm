@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import at.stefl.svm.object.action.SVMAction;
 import at.stefl.svm.tosvg.SVGStateWriter;
+import at.stefl.svm.tosvg.TranslationState;
 
 public abstract class SVGActionTranslator<T extends SVMAction> {
     
@@ -18,13 +19,13 @@ public abstract class SVGActionTranslator<T extends SVMAction> {
     }
     
     @SuppressWarnings("unchecked")
-    public void translate(SVMAction action, SVGStateWriter out)
-            throws IOException {
+    public void translate(SVMAction action, SVGStateWriter out,
+            TranslationState state) throws IOException {
         if (!actionClass.isAssignableFrom(action.getClass())) throw new IllegalArgumentException();
-        translateImpl((T) action, out);
+        translateImpl((T) action, out, state);
     }
     
-    protected abstract void translateImpl(T action, SVGStateWriter out)
-            throws IOException;
+    protected abstract void translateImpl(T action, SVGStateWriter out,
+            TranslationState state) throws IOException;
     
 }

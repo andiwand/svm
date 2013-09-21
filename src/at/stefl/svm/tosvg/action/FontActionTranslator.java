@@ -3,8 +3,8 @@ package at.stefl.svm.tosvg.action;
 import java.io.IOException;
 
 import at.stefl.svm.object.action.FontAction;
-import at.stefl.svm.object.basic.FontDefinition;
 import at.stefl.svm.tosvg.SVGStateWriter;
+import at.stefl.svm.tosvg.TranslationState;
 
 public class FontActionTranslator extends SVGActionTranslator<FontAction> {
     
@@ -15,12 +15,9 @@ public class FontActionTranslator extends SVGActionTranslator<FontAction> {
     }
     
     @Override
-    protected void translateImpl(FontAction action, SVGStateWriter out)
-            throws IOException {
-        FontDefinition f = action.getFontDefinition();
-        
-        out.addCurrentStyle("font-family", "" + f.getFamilyName());
-        out.addCurrentStyle("font-size", "" + f.getSize().getY());
+    protected void translateImpl(FontAction action, SVGStateWriter out,
+            TranslationState state) throws IOException {
+        state.setFontDefinition(action.getFontDefinition());
     }
     
 }
