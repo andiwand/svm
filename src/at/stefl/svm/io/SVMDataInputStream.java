@@ -1,6 +1,5 @@
 package at.stefl.svm.io;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import at.stefl.commons.math.RectangleI;
 import at.stefl.commons.math.vector.Vector2i;
 import at.stefl.svm.enumeration.SVMConstants;
 import at.stefl.svm.enumeration.TextEncoding;
+import at.stefl.svm.object.Color;
 import at.stefl.svm.object.Fraction;
 
 public class SVMDataInputStream extends ByteDataInputStream {

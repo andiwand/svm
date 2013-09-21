@@ -1,6 +1,5 @@
 package at.stefl.svm.io;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -12,6 +11,7 @@ import at.stefl.commons.math.vector.Vector2i;
 import at.stefl.commons.util.PrimitiveUtil;
 import at.stefl.svm.enumeration.SVMConstants;
 import at.stefl.svm.enumeration.TextEncoding;
+import at.stefl.svm.object.Color;
 import at.stefl.svm.object.Fraction;
 
 public class SVMDataOutputStream extends ByteDataOutputStream {
@@ -105,7 +105,7 @@ public class SVMDataOutputStream extends ByteDataOutputStream {
     }
     
     public void writeColorInt(Color color) throws IOException {
-        writeInt(color.getRGB());
+        writeInt(color.getARGB());
     }
     
     public void writeUnsignedShortPrefixedAsciiString(String string)
